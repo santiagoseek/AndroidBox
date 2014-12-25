@@ -24,6 +24,8 @@
         </activity>
      <activity android:name="com.example.androidbox.InternetUtilActivity" >
      </activity>
+     <activity android:name="com.example.androidbox.SystemUtilActivity" >
+     </activity>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />
