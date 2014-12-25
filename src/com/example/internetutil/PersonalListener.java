@@ -1,6 +1,7 @@
 package com.example.internetutil;
 
 import android.content.Context;
+import android.widget.Toast;
 
 public class PersonalListener implements OnActionListener {
 	
@@ -13,6 +14,8 @@ public class PersonalListener implements OnActionListener {
 	@Override
 	public void onActionSuccess(int actionId, ResponseParam ret) {
 		// TODO Auto-generated method stub
+		
+		Toast.makeText(context, ret.getString("cityid"), Toast.LENGTH_LONG).show();
 
 	}
 
