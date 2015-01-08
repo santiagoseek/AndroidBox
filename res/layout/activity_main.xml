@@ -23,8 +23,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AccessSystem" />
+        
+        <Button
+        android:id="@+id/multiProcess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MultiProcess" />
 
     </LinearLayout>
-
 </LinearLayout>
 
