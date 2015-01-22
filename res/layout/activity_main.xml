@@ -7,29 +7,34 @@
     tools:context="com.example.androidbox.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/accessInternet"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:text="AccessInternet" />
 
-        <Button
-            android:id="@+id/accessInternet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AccessInternet" />
+    <Button
+        android:id="@+id/getSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AccessSystem" />
 
-        <Button
-            android:id="@+id/getSystem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AccessSystem" />
-        
-        <Button
+    <Button
         android:id="@+id/multiProcess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MultiProcess" />
 
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/sharedPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SharedPreferences" />
 
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TestButton" />
+
+</LinearLayout>
