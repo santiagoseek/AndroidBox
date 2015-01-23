@@ -32,6 +32,12 @@
         android:text="SharedPreferences" />
 
     <Button
+        android:id="@+id/uiDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UIDialog" />
+
+    <Button
         android:id="@+id/testButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

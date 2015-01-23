@@ -1,5 +1,7 @@
 package com.example.androidbox;
 
+import com.example.ui.SomeDialog;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -60,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
 				MainActivity.this.startActivity(intent);
 			}
 		});
-
+		
 		Button multiProcess = (Button) this.findViewById(R.id.multiProcess);
 		multiProcess.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -96,6 +98,17 @@ public class MainActivity extends ActionBarActivity {
 				showDialog("this is testing showDialog, " + baseApp.getValue());
 				baseApp.setValue("update the value.");
 				showDialog("update the value. " + baseApp.getValue());
+			}
+		});
+		
+		Button uiDialog = (Button)findViewById(R.id.uiDialog);
+		uiDialog.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, SomeDialog.class);
+				MainActivity.this.startActivity(intent);
 			}
 		});
 	}
