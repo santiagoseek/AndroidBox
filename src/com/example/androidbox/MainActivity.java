@@ -7,9 +7,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,12 +23,17 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
 	private String tag = "MainActivity";
 	private BaseApplication baseApp;
+	
+	private static final String STATICACTION = "com.example.component.static";
+	private static final String DYNAMICACTION = "com.example.component.dynamic";
+	private static final String SYSTEMACTION = Intent.ACTION_POWER_CONNECTED ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				baseApp = (BaseApplication) getApplication();
 				showDialog("this is testing showDialog, " + baseApp.getValue());
-				baseApp.setValue("update the value.");
+				baseApp.setValue("update the value in mainactivity.");
 				showDialog("update the value. " + baseApp.getValue());
 			}
 		});
@@ -111,8 +118,107 @@ public class MainActivity extends ActionBarActivity {
 				MainActivity.this.startActivity(intent);
 			}
 		});
+		
+		Button gridUI = (Button)findViewById(R.id.gridui);
+		gridUI.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, GridUIActivity.class);
+				MainActivity.this.startActivity(intent);
+			}			
+		});
+		
+		Button sendStaticBtn = (Button)findViewById(R.id.send_static);
+		Button sendDynamicBtn = (Button)findViewById(R.id.send_dynamic);
+		Button sendSystemBtn = (Button)findViewById(R.id.send_system);
+		sendStaticBtn.setOnClickListener(new BrocastOnClickListener());
+		sendDynamicBtn.setOnClickListener(new BrocastOnClickListener());
+		sendSystemBtn.setOnClickListener(new BrocastOnClickListener());
+	}
+	
+	class BrocastOnClickListener implements OnClickListener{
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			if(arg0.getId() == R.id.send_static){
+				Log.w(tag, "发送自定义静态注册广播消息");
+				Intent intent = new Intent();
+				intent.setAction(STATICACTION);
+				intent.putExtra("msg", "接收静态注册广播成功");
+				sendBroadcast(intent);
+			}
+			else if(arg0.getId() == R.id.send_dynamic){
+				Log.w(tag, "发送自定义动态注册广播消息");
+				Intent intent = new Intent();
+				intent.setAction(DYNAMICACTION);
+				intent.putExtra("msg", "接收动态注册广播成功");
+				sendBroadcast(intent);
+			}
+			else if(arg0.getId() == R.id.send_system){
+				Log.w(tag, "发送系统动态注册广播消息");
+				Intent intent = new Intent();
+				intent.setAction(SYSTEMACTION);
+				intent.putExtra("msg", "正在充电。。。");
+			}
+		}
+	}
+	
+	protected void onStart(){
+		super.onStart();
+		Log.w(tag, "注册广播消息");
+		// 注册自定义动态广播消息  
+		IntentFilter filter_dynamic = new IntentFilter();
+		filter_dynamic.addAction(DYNAMICACTION);
+		registerReceiver(dynamicReceiver,filter_dynamic);
+		
+		// 注册系统动态广播消息  
+		// 只能在代码中注册，程序适应系统变化做操作，程序运行状态才能接收到
+		IntentFilter filter_system = new IntentFilter();
+		filter_system.addAction(SYSTEMACTION);
+		filter_system.addAction(Intent.ACTION_SCREEN_ON); //屏幕亮
+		filter_system.addAction(Intent.ACTION_SCREEN_OFF); //屏幕灭
+		filter_system.addAction(Intent.ACTION_TIME_TICK); //时间变化  每分钟一次
+		registerReceiver(systemReceiver,filter_system);
 	}
 
+	private BroadcastReceiver dynamicReceiver = new BroadcastReceiver(){
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Log.w(tag, "接收自定义动态注册广播消息");
+			if(intent.getAction().equals(DYNAMICACTION)){
+				String msg = intent.getStringExtra("msg");
+				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+			}
+		}
+	};
+	
+	private BroadcastReceiver systemReceiver = new BroadcastReceiver(){
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Log.w(tag, "接收系统动态注册广播消息");
+			if(intent.getAction().equals(SYSTEMACTION)){
+				String msg = intent.getStringExtra("msg");
+				Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+			}
+			else if(intent.getAction().equals(Intent.ACTION_SCREEN_ON)){
+				Toast.makeText(context, "Intent.ACTION_SCREEN_ON", Toast.LENGTH_LONG).show();
+			}
+			else if(intent.getAction().equals(Intent.ACTION_SCREEN_OFF)){
+				Toast.makeText(context, "Intent.ACTION_SCREEN_OFF", Toast.LENGTH_LONG).show();
+			}
+			else if(intent.getAction().equals(Intent.ACTION_TIME_TICK)){
+				Toast.makeText(context, "Intent.ACTION_TIME_TICK", Toast.LENGTH_LONG).show();
+			}
+		}
+		
+	};
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

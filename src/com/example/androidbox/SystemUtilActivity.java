@@ -24,7 +24,10 @@ public class SystemUtilActivity extends Activity {
         		
         		String root = "isRoot: " + String.valueOf(RootCheck.isRoot());
         		String emulator = "isEmulator: " + String.valueOf(EmulatorCheck.isQEmuEnvDetected(getApplicationContext()));
-        		String result = root + "\n" + emulator;	
+        		String baseApplication = "BaseApplication value:" + ((BaseApplication)getApplication()).getValue();
+        		String result = root + "\n" + emulator + "\n" + baseApplication;	
+        		
+        		((BaseApplication)getApplication()).setValue("SystemUtilActivity update");
         		getTv.setText(result);
         	}
         });

@@ -29,6 +29,19 @@
         </activity>
         <activity android:name="com.example.ui.SomeDialog" >
         </activity>
+        <activity android:name="com.example.androidbox.GridUIActivity" >
+        </activity>
+
+        <receiver android:name="com.example.component.StaticReceiver" >
+            <intent-filter>
+                <action android:name="com.example.component.static" />
+            </intent-filter>
+        </receiver>
+<!--         <receiver android:name="com.example.component.SystemReceiver" > -->
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.BATTERY_LOW" /> -->
+<!--             </intent-filter> -->
+<!--         </receiver> -->
 
         <service
             android:name="com.example.androidbox.MultiProcessService"
