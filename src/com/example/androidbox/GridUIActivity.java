@@ -2,9 +2,12 @@ package com.example.androidbox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -66,8 +69,10 @@ public class GridUIActivity extends Activity {
 				case 4:
 					break;
 				case 5:
+					goMap();
 					break;
 				case 6:
+					gocallNumber();
 					break;
 				case 7:
 					goMCtripPage();
@@ -92,4 +97,21 @@ public class GridUIActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public void gocallNumber(){
+		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:8888000"));
+		startActivity(intent);
+	}
+	
+	public void goMap(){
+		Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+		Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+		
+		PackageManager packageManager = getPackageManager();
+		List<ResolveInfo> activities = packageManager.queryIntentActivities(mapIntent, 0);
+		boolean isIntentSafe = activities.size() > 0;
+		
+		if(isIntentSafe) {
+			startActivity(mapIntent);
+		}
+	}
 }

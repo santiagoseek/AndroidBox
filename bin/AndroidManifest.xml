@@ -27,6 +27,8 @@
         </activity>
         <activity android:name="com.example.androidbox.SystemUtilActivity" >
         </activity>
+        <activity android:name="com.example.androidbox.HandlerActivity">
+        </activity>
         <activity android:name="com.example.ui.SomeDialog" >
         </activity>
         <activity android:name="com.example.androidbox.GridUIActivity" >

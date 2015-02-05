@@ -7,41 +7,56 @@
     tools:context="com.example.androidbox.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <Button
-        android:id="@+id/accessInternet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AccessInternet" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/getSystem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AccessSystem" />
+        <Button
+            android:id="@+id/accessInternet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AccessInternet" />
 
-    <Button
-        android:id="@+id/multiProcess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MultiProcess" />
+        <Button
+            android:id="@+id/getSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AccessSystem" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/sharedPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SharedPreferences" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/uiDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UIDialog" />
+        <Button
+            android:id="@+id/multiProcess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MultiProcess" />
 
-    <Button
-        android:id="@+id/testButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TestButton" />
+        <Button
+            android:id="@+id/sharedPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SharedPreferences" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/uiDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UIDialog" />
+
+        <Button
+            android:id="@+id/testButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TestButton" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -60,21 +75,33 @@
             android:text="动态注册广播" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/send_system"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="系统动态注册广播" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/send_system"
+            android:id="@+id/gridui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="系统动态注册广播" />
+            android:text="GridUI" />
+
+        <Button
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/gridui"
+        android:id="@+id/handler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GridUI" />
+        android:text="Handler" />
 
 </LinearLayout>

@@ -7,6 +7,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -130,12 +133,33 @@ public class MainActivity extends ActionBarActivity {
 			}			
 		});
 		
+		Button handler = (Button)findViewById(R.id.handler);
+		handler.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, HandlerActivity.class);
+				MainActivity.this.startActivity(intent);
+			}
+		});
+		
 		Button sendStaticBtn = (Button)findViewById(R.id.send_static);
 		Button sendDynamicBtn = (Button)findViewById(R.id.send_dynamic);
 		Button sendSystemBtn = (Button)findViewById(R.id.send_system);
 		sendStaticBtn.setOnClickListener(new BrocastOnClickListener());
 		sendDynamicBtn.setOnClickListener(new BrocastOnClickListener());
 		sendSystemBtn.setOnClickListener(new BrocastOnClickListener());
+		
+		Button notification = (Button)findViewById(R.id.notification);
+		notification.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				showNotification();
+			}
+		});
 	}
 	
 	class BrocastOnClickListener implements OnClickListener{
@@ -218,6 +242,18 @@ public class MainActivity extends ActionBarActivity {
 		}
 		
 	};
+	
+	public void showNotification(){
+		NotificationManager mNotificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification notification = new Notification(R.drawable.ic_launcher,"this is testing notification",System.currentTimeMillis());
+		notification.flags = Notification.FLAG_AUTO_CANCEL;
+		notification.defaults = notification.DEFAULT_SOUND|notification.DEFAULT_VIBRATE|notification.FLAG_SHOW_LIGHTS;
+		
+		Intent openIntent = new Intent(this, GridUIActivity.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(MainActivity.this.getApplicationContext() , 0, openIntent, 0);
+		notification.setLatestEventInfo(MainActivity.this.getApplicationContext(), "this is title.", "this is content text", contentIntent);
+		mNotificationManager.notify(0,notification);
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
