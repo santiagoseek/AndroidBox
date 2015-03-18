@@ -11,7 +11,6 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -39,9 +38,9 @@ public class GridUIActivity extends Activity {
 		String[] menu_text = getResources().getStringArray(R.array.main_munu_name);
 		GridView menu_grid = (GridView) findViewById(R.id.grid);
 		
-		ArrayList<HashMap<String, Object>> icon_text_list = new ArrayList<>();
+		ArrayList<HashMap<String, Object>> icon_text_list = new ArrayList<HashMap<String, Object>>();
 		for(int i=0;i<8;i++){
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("itemIcon", menu_icon_ids[i]);
 			map.put("itemtext", menu_text[i]);
 			icon_text_list.add(map);
