@@ -1,6 +1,7 @@
 package com.example.androidbox;
 
 import com.example.ui.SomeDialog;
+import com.example.ui.UITabActivity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -56,7 +57,8 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, SystemUtilActivity.class);
+				// intent.setClass(MainActivity.this, SystemUtilActivity.class);
+				intent.setClass(MainActivity.this, UITabActivity.class);
 				MainActivity.this.startActivity(intent);
 			}
 		});

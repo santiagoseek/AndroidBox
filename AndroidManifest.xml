@@ -31,8 +31,11 @@
         </activity>
         <activity android:name="com.example.ui.SomeDialog" >
         </activity>
+        <activity android:name="com.example.ui.UITabActivity" >
+        </activity>
         <activity android:name="com.example.androidbox.GridUIActivity" >
         </activity>
+
 
         <receiver android:name="com.example.component.StaticReceiver" >
             <intent-filter>
