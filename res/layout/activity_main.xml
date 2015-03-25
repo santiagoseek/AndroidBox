@@ -52,6 +52,12 @@
             android:text="UIDialog" />
 
         <Button
+            android:id="@+id/tabUI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TabUI" />
+
+        <Button
             android:id="@+id/testButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,10 +104,15 @@
             android:text="Notification" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/handler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Handler" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/handler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Handler" />
+    </LinearLayout>
 
 </LinearLayout>

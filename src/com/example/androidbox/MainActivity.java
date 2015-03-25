@@ -57,8 +57,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
-				// intent.setClass(MainActivity.this, SystemUtilActivity.class);
-				intent.setClass(MainActivity.this, UITabActivity.class);
+				intent.setClass(MainActivity.this, SystemUtilActivity.class);
 				MainActivity.this.startActivity(intent);
 			}
 		});
@@ -120,6 +119,17 @@ public class MainActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, SomeDialog.class);
+				MainActivity.this.startActivity(intent);
+			}
+		});
+		
+		Button tabUI = (Button)findViewById(R.id.tabUI);
+		tabUI.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, UITabActivity.class);
 				MainActivity.this.startActivity(intent);
 			}
 		});

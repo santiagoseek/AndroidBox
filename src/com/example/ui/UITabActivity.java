@@ -1,6 +1,7 @@
 package com.example.ui;
 
 import com.example.androidbox.GridUIActivity;
+import com.example.androidbox.HandlerActivity;
 import com.example.androidbox.InternetUtilActivity;
 import com.example.androidbox.R;
 import com.example.androidbox.SystemUtilActivity;
@@ -38,9 +39,9 @@ public class UITabActivity extends TabActivity implements OnCheckedChangeListene
         this.mMoreIntent = new Intent(this, MoreItemsActivity.class);*/
         this.mMBlogIntent = new Intent(this, GridUIActivity.class);
         this.mSearchIntent = new Intent(this, SystemUtilActivity.class);
-        this.mInfoIntent = new Intent(this, InternetUtilActivity.class);
-        this.mUserInfoIntent = new Intent(this, GridUIActivity.class);
-        this.mMoreIntent = new Intent(this, SystemUtilActivity.class);
+        this.mInfoIntent = new Intent(this, UIExpandableListView.class);
+        this.mUserInfoIntent = new Intent(this, SomeDialog.class);
+        this.mMoreIntent = new Intent(this, UIListViewActivity.class);
 
         initRadios();
         
@@ -89,10 +90,10 @@ public class UITabActivity extends TabActivity implements OnCheckedChangeListene
         TabHost localTabHost = this.mHost;
 
         localTabHost.addTab(buildTabSpec("mblog_tab", R.string.main_home,
-                R.drawable.icon1, this.mMBlogIntent));
+                R.drawable.i1, this.mMBlogIntent));
 
         localTabHost.addTab(buildTabSpec("message_tab", R.string.main_news,
-                R.drawable.icon2, this.mInfoIntent));
+                R.drawable.i2, this.mInfoIntent));
 
         localTabHost.addTab(buildTabSpec("userinfo_tab", R.string.main_my_info,
                 R.drawable.icon3, this.mUserInfoIntent));

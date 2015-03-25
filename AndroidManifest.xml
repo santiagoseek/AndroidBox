@@ -33,6 +33,10 @@
         </activity>
         <activity android:name="com.example.ui.UITabActivity" >
         </activity>
+        <activity android:name="com.example.ui.UIExpandableListView" >
+        </activity>
+        <activity android:name="com.example.ui.UIListViewActivity" >
+        </activity>
         <activity android:name="com.example.androidbox.GridUIActivity" >
         </activity>
 
