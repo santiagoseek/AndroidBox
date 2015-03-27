@@ -53,7 +53,7 @@ public class SystemUtilActivity extends Activity {
 				systemInfo.put("root", RootCheck.isRoot());
 				systemInfo.put("emu", EmulatorCheck.isQEmuEnvDetected(getApplicationContext()));
 				
-				 Iterator it = systemInfo.entrySet().iterator();
+				/* Iterator it = systemInfo.entrySet().iterator();
 				   while (it.hasNext()) {
 				    Map.Entry entry = (Map.Entry) it.next();
 				    String key = entry.getKey().toString();
@@ -62,7 +62,11 @@ public class SystemUtilActivity extends Activity {
 				   }
 				
 				
-				getTv.setText(result + "\r\n" + sb.toString());
+				getTv.setText(result + "\r\n" + sb.toString());*/
+				
+				getTv.setText(formatMapToString(SystemInfo.getSystemInfo(getApplicationContext())));
+				getTv.append("The ScendTime:\r\n");
+				getTv.append(formatMapToString(SystemInfo.getSystemInfo(getApplicationContext())));
 				
 				
 				String splitString = "$$$$$";
@@ -70,5 +74,17 @@ public class SystemUtilActivity extends Activity {
         	}
         });
     }
+    
+	public String formatMapToString(Map<String, String> map) {
+		StringBuilder sb = new StringBuilder();
+		Iterator it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String key = entry.getKey().toString();
+			String value = entry.getValue().toString();
+			sb.append(key + ":" + value + "\r\n");
+		}
+		return sb.toString();
+	}
 
 }
