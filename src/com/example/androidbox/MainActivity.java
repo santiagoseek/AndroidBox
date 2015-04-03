@@ -1,5 +1,6 @@
 package com.example.androidbox;
 
+import com.example.ui.CommonControl;
 import com.example.ui.SomeDialog;
 import com.example.ui.UITabActivity;
 
@@ -153,6 +154,18 @@ public class MainActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent();
 				intent.setClass(MainActivity.this, HandlerActivity.class);
+				MainActivity.this.startActivity(intent);
+			}
+		});
+		
+		Button controlTest = (Button)findViewById(R.id.controlTest);
+		controlTest.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainActivity.this, CommonControl.class);
 				MainActivity.this.startActivity(intent);
 			}
 		});

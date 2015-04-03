@@ -37,6 +37,8 @@
         </activity>
         <activity android:name="com.example.ui.UIListViewActivity" >
         </activity>
+        <activity android:name="com.example.ui.CommonControl" >
+        </activity>
         <activity android:name="com.example.androidbox.GridUIActivity" >
         </activity>
 

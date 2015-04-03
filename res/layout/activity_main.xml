@@ -113,6 +113,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Handler" />
+
+        <Button
+            android:id="@+id/controlTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ControlTest" />
+
     </LinearLayout>
 
 </LinearLayout>
