@@ -59,6 +59,16 @@
             android:label="@string/app_name"
             android:process="com.example.androidbox.service" >
         </service>
+        <service
+            android:name="com.example.component.MultiProcessServiceBusiness"
+            android:label="@string/app_name"
+            android:process=":BusinessService" >    <!--":"开头则为此服务开启一个为此应用私有的独立进程 -->
+        </service>
+        <service
+            android:name="com.example.component.MultiProcessServicePush"
+            android:label="@string/app_name"
+            android:process=":PushService" >
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

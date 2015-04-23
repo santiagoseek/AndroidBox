@@ -16,7 +16,7 @@ public class Constant {
 	public static final Integer NET_TYPE_OTHER = 4;
 	public static final Integer NET_TYPE_WIFI = 5;
 	
-	public static final String TAG = "UBTMobileAgent";
+	public static final String TAG = "AndroidBox";
 	public static final Integer PACK_MAX_SIZE = 2000;
 	
 	//时间常量
@@ -70,7 +70,7 @@ public class Constant {
 	public static final String SDK_OS = "Android";
 	
 	// /data/data/ctrip.android.view/databases/UBT.db /data/data/com.example.ubt/UBT.db
-	public static final String DB_NAME = "UBT.db";
+	public static final String DB_NAME = "AndroidBox.db";
 	public static final int DB_VERSION = 1;
 	public static final String MSG_SEQ_NUM = "msg_sequence_num_file";
 }

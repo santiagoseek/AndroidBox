@@ -1,5 +1,7 @@
 package com.example.androidbox;
 
+import com.example.systemutil.DBStorageService;
+
 import android.app.Application;
 
 public class BaseApplication extends Application {
@@ -11,6 +13,7 @@ public class BaseApplication extends Application {
 	{
 		super.onCreate();
 		setValue(value);
+		DBStorageService.initDBManage(this.getApplicationContext());
 	}
 	
 	public void setValue(String value)

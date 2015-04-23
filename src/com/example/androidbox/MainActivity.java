@@ -1,5 +1,17 @@
 package com.example.androidbox;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.example.component.MultiProcessServiceBusiness;
+import com.example.component.MultiProcessServicePush;
+import com.example.systemutil.Constant;
+import com.example.systemutil.DBStorageService;
+import com.example.systemutil.FileUtil;
+import com.example.systemutil.Message;
 import com.example.ui.CommonControl;
 import com.example.ui.SomeDialog;
 import com.example.ui.UITabActivity;
@@ -19,6 +31,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +46,7 @@ import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
-	private String tag = "MainActivity";
+	private String tag = Constant.TAG + "-MainActivity";
 	private BaseApplication baseApp;
 	
 	private static final String STATICACTION = "com.example.component.static";
@@ -45,6 +58,9 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		//QueueStorageService.initDBManage(context.getApplicationContext());
+			
+		
 		// if (savedInstanceState == null) {
 		// getSupportFragmentManager().beginTransaction()
 		// .add(R.id.container, new PlaceholderFragment())
@@ -106,12 +122,44 @@ public class MainActivity extends ActionBarActivity {
 		Button testButton = (Button) this.findViewById(R.id.testButton);
 		testButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
-				baseApp = (BaseApplication) getApplication();
-				showDialog("this is testing showDialog, " + baseApp.getValue());
-				baseApp.setValue("update the value in mainactivity.");
-				showDialog("update the value. " + baseApp.getValue());
+				//baseApp = (BaseApplication) getApplication();
+				//showDialog("this is testing showDialog, " + baseApp.getValue());
+				//baseApp.setValue("update the value in mainactivity.");
+				//showDialog("update the value. " + baseApp.getValue());
+				
+		    	List<Message> queueMsgs = new ArrayList<Message>(500);
+		    	for(int i = 0;i<500;i++){
+		    		Message msg = new Message("MainActivity","1");
+		    		msg.setPriority((short) i);
+		    		msg.setOfferTime(i);
+		    		msg.setUbtData(""+i);
+		    		msg.setExpireTime(i);
+		    		queueMsgs.add(msg);
+		    	}
+		    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+		    	Log.i(tag, "In MainActivity, before save queueMsgs to DB, the queueMsg's size is: " + queueMsgs.size() + "time:" + format.format(new Date(System.currentTimeMillis())));
+		    	String fileName = Environment.getExternalStorageDirectory() + File.separator + "aaaMessageFile";
+		    	
+/*				List<Message> readMessageList = new ArrayList<Message>();
+				//List<Message> readMessageList = FileUtil.readObjectFromLocation(this.messageFile, 10);
+				for(Object o:FileUtil.readObjectFromLocation(fileName,10)){
+					readMessageList.add((Message) o);
+				}
+				FileUtil.writeObjectToLocation(fileName, null, false);
+		    	DBStorageService.getInstance().save(readMessageList);*/
+		    	DBStorageService.getInstance().save(queueMsgs);
 			}
 		});
+		
+		Button cleanDB = (Button)findViewById(R.id.cleanDB);
+		cleanDB.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				//DBStorageService.getInstance().cleanDBSpace();
+				DBStorageService.getInstance().removeAll();
+			}});
 		
 		Button uiDialog = (Button)findViewById(R.id.uiDialog);
 		uiDialog.setOnClickListener(new OnClickListener(){
@@ -185,7 +233,36 @@ public class MainActivity extends ActionBarActivity {
 				showNotification();
 			}
 		});
+		
+		Button start = (Button) findViewById(R.id.start);
+		start.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Log.w(tag, "Start Process in MainActivity.");
+				//MainActivity.this.startService(new Intent(MainActivity.this, MultiProcessServiceBusiness.class));
+				boolean isMessagePush = true;
+				if (isMessagePush) {
+					MainActivity.this.startService(new Intent(MainActivity.this, MultiProcessServicePush.class));
+				}
+			}
+		});
+		
+		Button stop = (Button) findViewById(R.id.stop);
+		stop.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Log.w(tag, "Stop Process in MainActivity.");
+				//MainActivity.this.stopService(new Intent(MainActivity.this, MultiProcessServiceBusiness.class));
+				MainActivity.this.stopService(new Intent(MainActivity.this, MultiProcessServicePush.class));
+			}
+		});
 	}
+	
+	
 	
 	class BrocastOnClickListener implements OnClickListener{
 
@@ -215,6 +292,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 	
+	@Override
 	protected void onStart(){
 		super.onStart();
 		Log.w(tag, "注册广播消息");
@@ -229,10 +307,17 @@ public class MainActivity extends ActionBarActivity {
 		filter_system.addAction(SYSTEMACTION);
 		filter_system.addAction(Intent.ACTION_SCREEN_ON); //屏幕亮
 		filter_system.addAction(Intent.ACTION_SCREEN_OFF); //屏幕灭
-		filter_system.addAction(Intent.ACTION_TIME_TICK); //时间变化  每分钟一次
+		//filter_system.addAction(Intent.ACTION_TIME_TICK); //时间变化  每分钟一次
 		registerReceiver(systemReceiver,filter_system);
 	}
 
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		Log.w(tag, "main activity onDestory.");
+		unregisterReceiver(dynamicReceiver);
+		unregisterReceiver(systemReceiver);	
+	}
 	private BroadcastReceiver dynamicReceiver = new BroadcastReceiver(){
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -331,8 +416,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 		}).create();
 		alertDialog.show();

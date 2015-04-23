@@ -32,11 +32,6 @@ public class UITabActivity extends TabActivity implements OnCheckedChangeListene
         setContentView(R.layout.uitabhost);
 
         // ~~~~~~~~~~~~ ≥ı ºªØ
-        /*this.mMBlogIntent = new Intent(this, HomeListActivity.class);
-        this.mSearchIntent = new Intent(this, SearchSquareActivity.class);
-        this.mInfoIntent = new Intent(this, MessageGroup.class);
-        this.mUserInfoIntent = new Intent(this, MyInfoActivity.class);
-        this.mMoreIntent = new Intent(this, MoreItemsActivity.class);*/
         this.mMBlogIntent = new Intent(this, GridUIActivity.class);
         this.mSearchIntent = new Intent(this, SystemUtilActivity.class);
         this.mInfoIntent = new Intent(this, UIExpandableListView.class);
